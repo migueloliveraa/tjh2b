@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import fr.opensagres.xdocreport.core.XDocReportException;
 import fr.opensagres.xdocreport.form.ReportForm;
@@ -47,6 +48,18 @@ public class HomeController {
 		model.addAttribute(REPORT_FORM, new ReportForm());
 		
 		return "home";
+	}
+	
+	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
+	public ModelAndView adminPage() {
+ 
+		ModelAndView model = new ModelAndView();
+		model.addObject("title", "Spring Security Hello World");
+		model.addObject("message", "This is protected page!");
+		model.setViewName("admin");
+ 
+		return model;
+ 
 	}
 	
 	@RequestMapping(value = "/generateReport.html", method = RequestMethod.POST)
