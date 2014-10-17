@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
@@ -18,12 +19,12 @@
         p:password="${jdbc.password}" />
  
  
-    <bean id="sessionFactory"
-        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <bean id="abstractSessionFactory"
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" abstract="true">
         <property name="dataSource" ref="dataSource" />
-        <property name="configLocation">
-            <value>classpath:hibernate.cfg.xml</value>
-        </property>
+<!--         <property name="configLocation"> -->
+<!--             <value>classpath:hibernate.cfg.xml</value> -->
+<!--         </property> -->
         <property name="configurationClass">
             <value>org.hibernate.cfg.AnnotationConfiguration</value>
         </property>
@@ -48,4 +49,11 @@
 		</property>
     </bean>
 
+<bean id="sessionFactory" parent="abstractSessionFactory">
+		<property name="configLocations">
+			<list>
+				<value>classpath:hibernate.cfg.xml</value>
+			</list>
+		</property>
+	</bean>
 </beans>

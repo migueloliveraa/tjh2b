@@ -8,7 +8,7 @@
  
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/login" access="permitAll"></intercept-url>
-		<intercept-url pattern="/admin**" access="ROLE_USER" />
+<!-- 		<intercept-url pattern="/admin**" access="ROLE_USER" /> -->
 		<intercept-url pattern="/admin**" access="hasRole('ROLE_USER')" />
 		<form-login 
 		    login-page="/login" 
@@ -22,15 +22,25 @@
 		<csrf/>
 	</http>
  
-	<authentication-manager>
-	  <authentication-provider>
-	    <user-service>
-		<user name="user" password="123456" authorities="ROLE_USER" />
-	    </user-service>
-	  </authentication-provider>
-	</authentication-manager>
+<!-- 	<authentication-manager> -->
+<!-- 	  <authentication-provider> -->
+<!-- 	    <user-service> -->
+<!-- 		<user name="user" password="123456" authorities="ROLE_USER" /> -->
+<!-- 	    </user-service> -->
+<!-- 	  </authentication-provider> -->
+<!-- 	</authentication-manager> -->
  
-<!-- 		 <authentication-manager alias="authenticationManager"> -->
-<!-- 		        <authentication-provider user-service-ref="employeeDAO" /> -->
-<!-- 		 </authentication-manager> -->
+		 <authentication-manager alias="authenticationManager">
+		 		<authentication-provider user-service-ref="employeeDAO" >
+<!-- 		        <authentication-provider> -->
+<!-- 		        	<property name="userDetailsService" ref="employeeDAO" /> -->
+		        	<password-encoder ref="encoder" />
+<!-- 		        	 <password-encoder hash="bcrypt" /> --><!-- default bcrypt -->
+		        </authentication-provider>
+		 </authentication-manager>
+		 
+		 <beans:bean id="encoder" 
+				class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+
+  		</beans:bean>
 </beans:beans>

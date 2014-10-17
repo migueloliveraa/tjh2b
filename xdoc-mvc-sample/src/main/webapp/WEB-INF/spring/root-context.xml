@@ -11,11 +11,11 @@
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
         p:location="/WEB-INF/jdbc.properties" />
 
-	<import resource="/WEB-INF/spring/applicationContext-hibernate.xml"/>
+	<import resource="applicationContext-hibernate.xml"/>
 	
 	<!-- Application Services -->
-	<import resource="/WEB-INF/spring/applicationContext-service.xml"/>
+	<import resource="applicationContext-service.xml"/>
 	
 	<!-- Application Dao -->
-	<import resource="/WEB-INF/spring/applicationContext-dao.xml"/>	
+	<import resource="applicationContext-dao.xml"/>	
 </beans>
