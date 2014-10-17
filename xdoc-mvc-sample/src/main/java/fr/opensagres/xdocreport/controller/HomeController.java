@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.opensagres.xdocreport.core.XDocReportException;
@@ -35,7 +36,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -62,6 +63,26 @@ public class HomeController {
  
 	}
 	
+	//Spring Security see this :
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(
+			@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout) {
+	 
+			ModelAndView model = new ModelAndView();
+			if (error != null) {
+				model.addObject("error", "Invalid username and password!");
+			}
+	 
+			if (logout != null) {
+				model.addObject("msg", "You've been logged out successfully.");
+			}
+			model.setViewName("login");
+	 
+			return model;
+	 
+		}
+		
 	@RequestMapping(value = "/generateReport.html", method = RequestMethod.POST)
 	public String generateReport(@ModelAttribute(REPORT_FORM) ReportForm form,HttpServletResponse response) throws IOException, XDocReportException {
 		logger.info("START: generateReport");
