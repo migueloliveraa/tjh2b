@@ -35,4 +35,9 @@ public class EmployeeDAOImpl extends BaseDAOHibernate implements EmployeeDAO,Use
 		return findById(EmployeeEntity.class, id);
 	}
 
+	@Override
+	public void saveOrUpdateEmployee(EmployeeEntity employee) {
+		save(employee);
+	}
+
 }

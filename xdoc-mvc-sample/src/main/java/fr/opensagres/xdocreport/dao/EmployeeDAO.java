@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import fr.opensagres.xdocreport.model.EmployeeEntity;
 
 public interface EmployeeDAO {
-	public EmployeeEntity findById(Long id);
-	public UserDetails loadUserByUsername(String username);
+	EmployeeEntity findById(Long id);
+	void saveOrUpdateEmployee(EmployeeEntity employee);
+	UserDetails loadUserByUsername(String username);
 }

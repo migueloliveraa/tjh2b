@@ -1,5 +1,7 @@
 package fr.opensagres.xdocreport.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,7 @@ public class EmployeeEntity {
     @Id
     @Column(name="ID")
     @GeneratedValue
-    private Integer id;
+    private Long id;
      
     @Column(name="FIRSTNAME")
     private String firstname;
@@ -27,7 +29,9 @@ public class EmployeeEntity {
     @Column(name="TELEPHONE")
     private String telephone;
      
-     
+    @Column(name="UPDATED_DATE")
+    private Date updatedDate;
+    
     public String getEmail() {
         return email;
     }
@@ -52,10 +56,17 @@ public class EmployeeEntity {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+    
 }

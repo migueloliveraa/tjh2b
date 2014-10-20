@@ -19,4 +19,8 @@
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
+    
+    <bean id="employeeEntityService" class="fr.opensagres.xdocreport.service.EmployeeEntityServiceImpl">
+		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>
 </beans>

@@ -11,5 +11,7 @@
         http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<bean id="employeeDAO" class="fr.opensagres.xdocreport.dao.EmployeeDAOImpl"></bean>
+	<bean id="employeeDAO" class="fr.opensagres.xdocreport.dao.EmployeeDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 </beans>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.opensagres.xdocreport.core.XDocReportException;
+import fr.opensagres.xdocreport.facade.WebFacade;
 import fr.opensagres.xdocreport.form.ReportForm;
+import fr.opensagres.xdocreport.model.EmployeeEntity;
 import fr.opensagres.xdocreport.utils.ReportGenerator;
 
 /**
@@ -32,6 +35,8 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	private static final String REPORT_FORM = "reportForm";
+	@Autowired
+	private WebFacade webFacade;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -46,8 +51,17 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute(REPORT_FORM, new ReportForm());
+		ReportForm form = new ReportForm();
+		model.addAttribute(REPORT_FORM, form);
 		
+		EmployeeEntity employee = webFacade.findById(1L);
+		form.setName(employee.getFirstname() + ", " + employee.getLastname());
+		
+		employee.setFirstname("MiguelLucio");
+		employee.setUpdatedDate(new Date());
+		webFacade.saveOrUpdateEmployee(employee);
+		
+		logger.info("name is: " + employee.getFirstname());
 		return "home";
 	}
 	
