@@ -11,7 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public class EmployeeDAOImpl implements EmployeeDAO,UserDetailsService  {
+import fr.opensagres.xdocreport.dao.common.BaseDAOHibernate;
+import fr.opensagres.xdocreport.model.EmployeeEntity;
+
+public class EmployeeDAOImpl extends BaseDAOHibernate implements EmployeeDAO,UserDetailsService  {
 
 	@Override
 	public UserDetails loadUserByUsername(String username)  throws UsernameNotFoundException, DataAccessException {
@@ -25,6 +28,11 @@ public class EmployeeDAOImpl implements EmployeeDAO,UserDetailsService  {
 //        UserDetails user = new User(username, "password", true, true, true, true, new GrantedAuthority[]{ new GrantedAuthorityImpl("ROLE_USER") });
 		UserDetails user = new User(username, "123456", true, true, true, true, grantedAuthorities);
         return user;
+	}
+
+	@Override
+	public EmployeeEntity findById(Long id) {
+		return findById(EmployeeEntity.class, id);
 	}
 
 }

@@ -31,9 +31,12 @@
 <!-- 	</authentication-manager> -->
  
 		 <authentication-manager alias="authenticationManager">
-		 		<authentication-provider user-service-ref="employeeDAO" >
+<!-- 		 		<authentication-provider user-service-ref="employeeDAO" > -->
+<authentication-provider>
+<jdbc-user-service data-source-ref="msAccessDataSource"
+				users-by-username-query="select username,password, enabled from users where username=?"
+				authorities-by-username-query="select username, authority from authorities where username =?" />
 <!-- 		        <authentication-provider> -->
-<!-- 		        	<property name="userDetailsService" ref="employeeDAO" /> -->
 		        	<password-encoder ref="encoder" />
 <!-- 		        	 <password-encoder hash="bcrypt" /> --><!-- default bcrypt -->
 		        </authentication-provider>
