@@ -22,7 +22,7 @@
 </h1>
 <div style="text-align:right" ><a href="javascript:formSubmit()"> Logout</a></div>
 <p>  The time on the server is ${serverTime}. </p>
-<form:form action="generateReport.html" method="POST" commandName="reportForm" >
+<form:form action="generateJasperReport.html" method="POST" commandName="reportForm"  target="_blank">
 	Nombre:
 	<form:input path="name"/><br/>
 	<input type="submit" value="View" />
